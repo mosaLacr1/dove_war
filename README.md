@@ -4,6 +4,8 @@
 
 规格来源：[TARGET.md](TARGET.md)；施工计划与决策记录：[PLAN.md](PLAN.md)。
 
+**在线试玩（GitHub Pages）**：<https://mosaLacr1.github.io/dove_war/>
+
 ## 截图
 
 | 地图（10×16，镜像生成） | 决斗（三层平台 + 跳跃） |
@@ -31,6 +33,13 @@ npm run build    # 类型检查 + 生产构建
 > 本机环境注意：Node 为 v20.10.0，因此锁定了 `vite@^6`（Vite 7/8 要求 ≥20.19）。
 > `.npmrc` 已把 npm 缓存指到项目内的 `.npm-cache/`，避免沙箱外写入被拒。
 > `scripts/ui-check.mjs` 默认调用本机 Chrome，可用环境变量 `CHROME_PATH` 指定其他 Chromium。
+
+## 部署
+
+推送到 `main` 会触发 `.github/workflows/deploy-pages.yml`：`npm ci` → `npm run build` → 把 `dist` 发布到 GitHub Pages。
+仓库首次启用时，需要在 Settings → Pages → Build and deployment → **Source 选择 GitHub Actions**（不要用 "Deploy from a branch"，否则会直接发布源码 `index.html`，线上白屏）。
+
+Vite 的 `base` 设为 `'./'`，所以构建产物放在 `/<repo>/` 这样的子路径下也能正确加载 `assets`。
 
 ## 第一次玩
 
